@@ -1,0 +1,76 @@
+programa {
+  inclua biblioteca Util --> u
+
+  /**
+   * Main function
+   * 
+   * @return void
+   */
+  funcao inicio() {
+    caracter characterUserChoice
+    
+    enquanto (characterUserChoice != 'p' e characterUserChoice != 'r' e  characterUserChoice != 's') {
+      escreva("Please insert 'p' for 'paper', 'r' for 'rock' or 's' for 'scissors': ")
+      leia(characterUserChoice)
+    }
+
+    cadeia stringUserChoice = getCompleteStringOfChoice(
+      characterUserChoice
+    )
+
+    cadeia stringComputerChoice = getCompleteStringOfChoice(
+      getRandomComputerChoice() 
+    )
+    
+    se ((stringUserChoice == "paper" e stringComputerChoice == "rock") ou (stringUserChoice == "rock" e stringComputerChoice == "scissors") ou (stringUserChoice == "scissors" e stringComputerChoice == "paper")) {
+      escreva("\nUser win\n\n")
+    } senao se (stringUserChoice == stringComputerChoice) {
+      escreva("\nDraw\n\n")
+    } senao {
+      escreva("\nComputer win\n\n")
+    }
+
+    escreva("User selected: " + stringUserChoice + "\n")
+    escreva("Computer selected: " + stringComputerChoice + "\n")
+  }
+
+  /**
+   * Get the character of the computer random choice
+   * 
+   * @return caracter
+   */
+  funcao getRandomComputerChoice() {
+    inteiro escolhaInteiroComputador = u.sorteia(1, 3)
+
+    se (escolhaInteiroComputador == 1) {
+      retorne 'p'
+    } 
+    
+    se (escolhaInteiroComputador == 2) {
+      retorne 'r'
+    } 
+
+    retorne 's'
+  }
+
+  /**
+   * Transform a character related of a choice (computer or user choice) 
+   * in a complete string, like: 'p' -> "paper"
+   * 
+   * @param caracter choice Choice to convert to the complete string,
+                            like 'p' -> 'paper'
+   *
+   * @return cadeia
+   */
+  funcao getCompleteStringOfChoice(caracter choice) {
+    se (choice == 'p') {
+      retorne "paper"
+    }
+
+    se (choice == 'r') {
+      retorne "rock"
+    }
+
+    retorne "scissors"
+  }
+}
